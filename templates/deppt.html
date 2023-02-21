@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Nova Communication</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/img/favicon.png" rel="icon">
+  <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="static/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Moderna - v4.11.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<style>
+    .invisible{
+        visibility: hidden;
+    }
+</style>
+<body>
+     <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="index.html"><span>Nova Communication</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="" href="index.html">Home</a></li>
+            <li><a class="notification" href="notification">Notification</a></li>
+          <li><a href="login.html">Log Out</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <section class="section-50">
+		<div class="container">
+			<h3 class="m-b-50 heading-line"> Video Department Notifications <i class="fa fa-bell text-muted"></i></h3>
+
+			<div class="cards-parent">
+                
+            </div>
+
+
+            
+
+
+            
+        </div>
+
+	</section>
+
+
+
+    <!-- <section class="breadcrumbs">
+        <div class="container">
+         <div class="notification-panel">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>NOTIFICATIONS</h2>
+            <ol class="noti">
+            </ol>
+          </div>
+        </div>
+        </div>
+      </section> -->
+    
+    <!-- <div class="notification-panel">
+        <ul class="noti">
+            
+        </ul>
+    </div> -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="static/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="static/vendor/aos/aos.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="static/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="static/vendor/php-email-form/validate.js"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="static/js/main.js"></script>
+</body>
+<script>
+
+    window.onload = ()=> {
+       
+        fetchStatus()
+    }
+    
+    function fetchStatus() {
+        var id = localStorage.getItem('id')
+        
+        fetch('/check_d_notification',{
+        method:"POST",
+        headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+        body:JSON.stringify({"id":id})
+        })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            len = data['len']
+            console.log(data)
+            data = data['data']
+            if (len > 0){
+            var parent = document.getElementsByClassName('cards-parent')[0]
+            
+            data.forEach(element => {
+            
+            console.log(element)
+
+
+            main_div = document.createElement('div')
+            main_div.classList.add(element[0]) 
+            main_div.classList.add('notification-ui_dd-content')
+            
+            main_div.style.cursor = 'pointer';
+
+            main_inner = document.createElement('div')
+            main_inner.classList.add('notification-list')
+            main_inner.classList.add('notification-list--unread')
+            main_div.append(main_inner)
+
+            main_inner_2 = document.createElement('div')
+            main_inner_2.classList.add('notification-list_content')
+            main_inner.append(main_inner_2)
+
+
+            main_inner_3 = document.createElement('div')
+            main_inner_3.classList.add('notification-list_detail')
+            main_inner_2.append(main_inner_3)
+
+
+            main_inner_4 = document.createElement('div')
+            main_inner_4.classList.add('noti')
+            main_inner_3.append(main_inner_4)
+
+
+            
+            if (element[1] === 'txt'){ // for text type
+                main_inner_5 = document.createElement('p')
+                main_inner_5.textContent = element[2]
+                main_inner_6 = document.createElement('h6')
+                main_inner_6.textContent = humanized_time_span(element[5])
+                main_inner_5.append(main_inner_6)
+                main_inner_4.append(main_inner_5)
+            }else{
+                //For file type 
+                main_inner_5 = document.createElement('a')
+                main_inner_5.setAttribute('href',element[3]) 
+                main_inner_5.textContent = element[3].split('/')[2]
+                main_inner_6 = document.createElement('h6')
+                main_inner_6.textContent = humanized_time_span(element[5])
+                main_inner_5.append(main_inner_6)
+                main_inner_4.append(main_inner_5)
+            }
+            
+            
+                
+                main_div.onclick = (e)=>{
+                    
+                    var notification_id = e['srcElement']['parentElement']['classList'][0]
+                    console.log(notification_id)
+                    
+                    employe_id = localStorage.getItem('id')
+                    
+                    fetch('/read_notification',{
+                        method:"POST",
+                        headers:{
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                    },
+                        body:JSON.stringify({"n_id":notification_id,"e_id":employe_id})
+                    }).then(json => json.json())
+                    .then(data =>{
+                        location.reload()
+                    })
+                }
+                parent.append(main_div)
+            });
+            
+            
+            }
+        })
+        .catch(function (err) {
+            console.log('error: ' + err);
+        });
+  }
+
+
+
+  
+function humanized_time_span(date, ref_date, date_formats, time_units) {
+  //Date Formats must be be ordered smallest -> largest and must end in a format with ceiling of null
+  date_formats = date_formats || {
+    past: [
+      { ceiling: 60, text: "$seconds seconds ago" },
+      { ceiling: 3600, text: "$minutes minutes ago" },
+      { ceiling: 86400, text: "$hours hours ago" },
+      { ceiling: 2629744, text: "$days days ago" },
+      { ceiling: 31556926, text: "$months months ago" },
+      { ceiling: null, text: "$years years ago" }      
+    ],
+    future: [
+      { ceiling: 60, text: "in $seconds seconds" },
+      { ceiling: 3600, text: "in $minutes minutes" },
+      { ceiling: 86400, text: "in $hours hours" },
+      { ceiling: 2629744, text: "in $days days" },
+      { ceiling: 31556926, text: "in $months months" },
+      { ceiling: null, text: "in $years years" }
+    ]
+  };
+  //Time units must be be ordered largest -> smallest
+  time_units = time_units || [
+    [31556926, 'years'],
+    [2629744, 'months'],
+    [86400, 'days'],
+    [3600, 'hours'],
+    [60, 'minutes'],
+    [1, 'seconds']
+  ];
+  
+  date = new Date(date);
+  ref_date = ref_date ? new Date(ref_date) : new Date();
+  var seconds_difference = (ref_date - date) / 1000;
+  
+  var tense = 'past';
+  if (seconds_difference < 0) {
+    tense = 'future';
+    seconds_difference = 0-seconds_difference;
+  }
+  
+  function get_format() {
+    for (var i=0; i<date_formats[tense].length; i++) {
+      if (date_formats[tense][i].ceiling == null || seconds_difference <= date_formats[tense][i].ceiling) {
+        return date_formats[tense][i];
+      }
+    }
+    return null;
+  }
+  
+  function get_time_breakdown() {
+    var seconds = seconds_difference;
+    var breakdown = {};
+    for(var i=0; i<time_units.length; i++) {
+      var occurences_of_unit = Math.floor(seconds / time_units[i][0]);
+      seconds = seconds - (time_units[i][0] * occurences_of_unit);
+      breakdown[time_units[i][1]] = occurences_of_unit;
+    }
+    return breakdown;
+  }
+
+  function render_date(date_format) {
+    var breakdown = get_time_breakdown();
+    var time_ago_text = date_format.text.replace(/\$(\w+)/g, function() {
+      return breakdown[arguments[1]];
+    });
+    return depluralize_time_ago_text(time_ago_text, breakdown);
+  }
+  
+  function depluralize_time_ago_text(time_ago_text, breakdown) {
+    for(var i in breakdown) {
+      if (breakdown[i] == 1) {
+        var regexp = new RegExp("\\b"+i+"\\b");
+        time_ago_text = time_ago_text.replace(regexp, function() {
+          return arguments[0].replace(/s\b/g, '');
+        });
+      }
+    }
+    return time_ago_text;
+  }
+          
+  return render_date(get_format());
+}
+</script>
+</html>

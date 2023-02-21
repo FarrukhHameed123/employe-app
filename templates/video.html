@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Nova Communication</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="static/img/favicon.png" rel="icon">
+  <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="static/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="static/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Moderna - v4.11.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<body>
+     <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="index.html"><span>Nova Communication</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="" href="index.html">Home</a></li>
+            <li><a class="notification" href="notification">Notification</a></li>
+            <li class="dropdown"><a href="#"><span>Department</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                  <li><a href="admin"> Global Notification</a></li>
+                  <li><a href="admin_acount"> Admin_account</a></li>
+                  <li class="dropdown"><a href="#"><span>More Department</span> <i class="bi bi-chevron-right"></i></a>
+                    <ul>
+                      <li><a href="  deployment_team_isb ">Deployment team Islamabad </a></li>
+                      <li><a href="deployment_team_lahore">Deployment Team Lahore</a></li>
+                      <li><a href="Fiber_team_Islamabad">Fiber Team Islamabad</a></li>
+                      <li><a href="coaxial_department">Coaxial Department</a></li>
+                      <li><a href="#">Lahore Fiber Department</a></li>
+                      <li><a href="#">DHA Lahore Department</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="sales_market">Sales and marketing</a></li>
+                  <li><a href="Customer_support">  Customer Support</a></li>
+                  <li><a href="video_department">Video Department</a></li>
+                  <li><a href="pak_navy_coxal">Pak Navy Coxail</a></li>
+                </ul>
+              </li>
+          <li><a href="login.html">Log Out</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+    <section class="breadcrumbs">
+        <div class="container">
+         <div class="">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2>Admin</h2>
+            <ol class="">
+            </ol>
+          </div>
+        </div>
+        </div>
+      </section>
+
+    <!--- TEXT PUSH NOTIFICATIONS-->
+    <section class="section-50">
+      
+		<div class="container ">
+      
+			<h3 class="m-b-50 heading-line">Notifications   <i class="fa fa-bell text-muted"></i></h3>
+    
+
+   <!-- Video_department -->
+   <div class="department-notification">
+    <h4 class ="m-b heading-line">Video Department Notice</h4>
+    <input class="d-notification-text" type="text" class="on">
+    <button class="button" onclick="sendDepartmentalNotification()" >Send notification</button>
+  
+    <form action="/d_file" method="post" enctype="multipart/form-data">
+        <input name="d-notification-file" type="file">
+         <input type="submit" value="Send Notification" class="buttono"></input>
+    </form>
+    </div>
+    <!-- Video_department -->
+
+
+</div>
+</section>
+
+    <!--- TEXT PUSH NOTIFICATIONS-->
+
+</body>
+
+<script>
+ 
+
+// Video_department
+function sendDepartmentalNotification(){
+      var d_text = document.getElementsByClassName('d-notification-text')[0].value
+      fetch('/send_d_notification',{
+            method:"POST",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"text":d_text})
+        }).then(ress => ress.json())
+        .then(dataa =>{
+            alert(dataa['response'])
+        })
+
+    }
+
+    function sendDepartmentalNotificationFile(){
+        var d_text = document.getElementsByClassName('d-notification-file')[0].src
+        console.log(d_text)
+         fetch('/send_d_notification_file',{
+            method:"POST",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({"text":d_text})
+        }).then(ress => ress.json())
+        .then(dataa =>{
+            alert(dataa['response'])
+        })
+    }
+    // Video_department
+</script>
+</html>
